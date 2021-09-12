@@ -70,7 +70,7 @@ def post_comment(author_id, worker_id, task_id):
         headers=headers,
         data=data
     )
-    print(r.json())
+    print(r.text)
     print(r.status_code)
 
 
