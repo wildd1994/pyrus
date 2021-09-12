@@ -31,6 +31,7 @@ def _is_signature_correct(message, secret, signature):
 def _prepare_response(body):
     author_id = json.loads(body)["task"]["author"]["id"]
     employer_tech_company_id, employer_tech_sup_id = get_id_employer()
+    print(json.loads(body))
     if author_id in employer_tech_company_id:
         for employer in employer_tech_sup_id:
             if employer['first_name'] == 'Поддержка' and employer['last_name'] == 'Первый':
@@ -41,7 +42,7 @@ def _prepare_response(body):
             if employer['first_name'] == 'Поддержка' and employer['last_name'] == 'Второй':
                 worker_id = employer['id']
                 break
-    return "{{  \"reassign_to\":{{ \"id\":{} }}, \"approval_choice\": \"{}\" }}".format(worker_id, 'approved')
+    return "{{  \"reassign_to\":{{ \"id\":{} }}, \"approval_choice\": \"{}\" }}".format(author_id, 'approved')
 
 
 def get_id_employer():
