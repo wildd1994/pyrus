@@ -43,11 +43,6 @@ def _prepare_response(body):
             if employer['first_name'] == 'Поддержка' and employer['last_name'] == 'Второй':
                 worker_id = employer['id']
                 break
-    return post_comment(author_id, worker_id, task_id)
-
-
-def post_comment(author_id, worker_id, task_id):
-    access_token = os.environ['access_token']
     data = {
         "reassign_to": {
             "id": author_id
@@ -62,16 +57,7 @@ def post_comment(author_id, worker_id, task_id):
             ]
         ]
     }
-    headers = {
-        'Authorization': f'Bearer {access_token}'
-    }
-    r = requests.post(
-        f'https://api.pyrus.com/v4/task/{task_id}/comments',
-        headers=headers,
-        data=data
-    )
-    print(r.text)
-    print(r.status_code)
+    return data
 
 
 def get_id_employer():
