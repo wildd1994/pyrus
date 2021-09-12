@@ -31,7 +31,6 @@ def _is_signature_correct(message, secret, signature):
 def _prepare_response(body):
     author_id = json.loads(body)["task"]["author"]["id"]
     employer_tech_company_id, employer_tech_sup_id = get_id_employer()
-    print(json.loads(body))
     if author_id in employer_tech_company_id:
         for employer in employer_tech_sup_id:
             if employer['first_name'] == 'Поддержка' and employer['last_name'] == 'Первый':
