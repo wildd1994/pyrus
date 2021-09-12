@@ -48,18 +48,10 @@ def _prepare_response(body):
             "id": author_id
         },
         "approval_choice": "approved",
-        # "approvals_added": [
-        #     [],
-        #     [
-        #         {
-        #             "id": worker_employer["id"]
-        #         }
-        #     ]
-        # ]
         "field_updates:": [
             {
                 "id": 2,
-                "values": {
+                "value": {
                     "id": worker_employer["id"]
                 }
             }
