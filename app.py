@@ -65,11 +65,13 @@ def post_comment(author_id, worker_id, task_id):
     headers = {
         'Authorization': f'Bearer {access_token}'
     }
-    return requests.post(
+    r = requests.post(
         f'https://api.pyrus.com/v4/task/{task_id}/comments',
         headers=headers,
         data=data
     )
+    print(r)
+    print(r.status_code)
 
 
 def get_id_employer():
