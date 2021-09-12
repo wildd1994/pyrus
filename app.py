@@ -48,7 +48,7 @@ def _prepare_response(body):
             "id": author_id
         },
         "approval_choice": "approved",
-        "approvals": [
+        "approvals_added": [
             [],
             [
                 {
