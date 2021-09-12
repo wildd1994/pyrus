@@ -31,6 +31,7 @@ def _is_signature_correct(message, secret, signature):
 def _prepare_response(body):
     author_id = json.loads(body)["task"]["author"]["id"]
     employer_tech_company_id, employer_tech_sup_id = get_id_employer()
+    task_id = json.loads(body)["task"]["id"]
     print(json.loads(body))
     if author_id in employer_tech_company_id:
         for employer in employer_tech_sup_id:
@@ -42,7 +43,34 @@ def _prepare_response(body):
             if employer['first_name'] == 'Поддержка' and employer['last_name'] == 'Второй':
                 worker_id = employer['id']
                 break
-    return "{{   \"approval_choice\": \"{}\", \"changed_step\": \"{}\", \"approvals_added\":{{ \"id\":{} }} }}".format('approved', 2, worker_id)
+    post_comment(author_id, worker_id, task_id)
+
+
+def post_comment(author_id, worker_id, task_id):
+    access_token = os.environ['access_token']
+    data = {
+        "reassign_to": {
+            "id": author_id
+        },
+        "approval_choice": "approved",
+        "approvals_added": [
+            [],
+            [
+                {
+                    "id": worker_id
+                }
+            ]
+        ]
+    }
+    headers = {
+        'Authorization': f'Bearer {access_token}'
+    }
+    requests.post(
+        f'https://api.pyrus.com/v4/task/{task_id}/comments',
+        headers=headers,
+        data=data
+    )
+
 
 def get_id_employer():
     access_token = os.environ['access_token']
