@@ -42,7 +42,7 @@ def _prepare_response(body):
             if employer['first_name'] == 'Поддержка' and employer['last_name'] == 'Второй':
                 worker_id = employer['id']
                 break
-    return "{{   \"approval_choice\": \"{}\", \"approvals_added\":{{ \"id\":{} }} }}".format('approved', worker_id)
+    return "{{  \"approvals_added\":{{ \"id\":{} }} }}".format(worker_id)
 
 def get_id_employer():
     access_token = os.environ['access_token']
