@@ -56,7 +56,7 @@ def _prepare_response(body):
         #         }
         #     ]
         # ]
-        "fields:": [
+        "field_updates:": [
             {
                 "id": 2,
                 "values": {
