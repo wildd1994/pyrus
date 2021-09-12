@@ -42,6 +42,7 @@ def _prepare_response(body):
                 worker_employer = employer
                 break
     text = f'Ваш оператор: {worker_employer["first_name"]} {worker_employer["last_name"]}'
+    print(worker_employer["id"], type(worker_employer["id"]))
     data = {
         "text": text,
         "reassign_to": {
