@@ -31,19 +31,20 @@ def _is_signature_correct(message, secret, signature):
 def _prepare_response(body):
     author_id = json.loads(body)["task"]["author"]["id"]
     employer_tech_company_id, employer_tech_sup_id = get_id_employer()
-    task_id = json.loads(body)["task"]["id"]
     print(json.loads(body))
     if author_id in employer_tech_company_id:
         for employer in employer_tech_sup_id:
             if employer['first_name'] == 'Поддержка' and employer['last_name'] == 'Первый':
-                worker_id = employer['id']
+                worker_employer = employer
                 break
     else:
         for employer in employer_tech_sup_id:
             if employer['first_name'] == 'Поддержка' and employer['last_name'] == 'Второй':
-                worker_id = employer['id']
+                worker_employer = employer
                 break
+    text = f'Ваш оператор: {worker_employer["first_name"]} {worker_employer["last_name"]}'
     data = {
+        "text": text,
         "reassign_to": {
             "id": author_id
         },
@@ -52,7 +53,7 @@ def _prepare_response(body):
             [],
             [
                 {
-                    "id": worker_id
+                    "id": worker_employer["id"]
                 }
             ]
         ]
