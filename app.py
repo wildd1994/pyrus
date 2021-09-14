@@ -80,10 +80,6 @@ def get_id_employer():
         for item in r.json()['members']
         if item['position'] == 'tech'
     ]
-    # for item in r.json()['members']:
-    #     if item['position'] == 'tech':
-    #         list_of_members_tech.append(dict(id=item['id'], first_name=item['first_name'], last_name=item['last_name']))
-    print(list_of_members_id, list_of_members_tech)
     return list_of_members_id, list_of_members_tech
 
 
