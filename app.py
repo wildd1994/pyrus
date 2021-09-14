@@ -70,12 +70,12 @@ def get_id_employer():
         'https://api.pyrus.com/v4/members',
         headers=headers
     )
-    list_of_members_id = list()
-    list_of_members_tech = list()
+    list_of_members_id = [item['id'] for item in r.json()['members']]
+    list_of_members_tech = []
     for item in r.json()['members']:
-        list_of_members_id.append(item['id'])
         if item['position'] == 'tech':
             list_of_members_tech.append(dict(id=item['id'], first_name=item['first_name'], last_name=item['last_name']))
+    print(list_of_members_id, list_of_members_tech)
     return list_of_members_id, list_of_members_tech
 
 
